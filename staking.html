@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AviaHub (€HUB) — Stake for Access</title>
+<link rel="icon" href="hub_logo.png" />
+<link rel="stylesheet" href="ai-agent.css" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: radial-gradient(ellipse at top, #0F2A3D 0%, #0A0E27 50%, #060920 100%); color: #E0E6FF; line-height: 1.6; padding: 40px 0 80px; }
+.container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+.header-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; flex-wrap: wrap; gap: 12px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; }
+.logo img { height: 40px; width: auto; border-radius: 50%; box-shadow: 0 0 20px rgba(0,212,255,0.5); }
+.logo span { font-size: 20px; font-weight: 700; }
+.back-btn { color: #8A94C8; text-decoration: none; font-size: 13px; padding: 8px 16px; border: 1px solid #2A2F5A; border-radius: 20px; transition: 0.3s; }
+.back-btn:hover { border-color: #00D4FF; color: #00D4FF; }
+
+.section-header { text-align: center; margin-bottom: 40px; }
+.section-tag { display: inline-block; background: rgba(0,212,255,0.12); color: #00D4FF; padding: 4px 16px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; border: 1px solid rgba(0,212,255,0.2); }
+.section-header h1 { font-size: 36px; font-weight: 700; margin: 8px 0; }
+.section-header h1 .highlight { color: #00D4FF; }
+.section-header p { color: #8A94C8; max-width: 700px; margin: 0 auto; font-size: 15px; }
+
+.access-gate { max-width: 800px; margin: 40px auto; background: linear-gradient(160deg, rgba(26,30,65,0.7), rgba(15,42,61,0.7)); border: 2px solid rgba(0,212,255,0.4); border-radius: 24px; padding: 40px 32px; text-align: center; box-shadow: 0 20px 60px rgba(0,212,255,0.2); }
+.access-gate .lock-icon { font-size: 64px; margin-bottom: 16px; filter: drop-shadow(0 0 30px rgba(0,212,255,0.6)); }
+.access-gate h2 { color: #fff; font-size: 26px; margin-bottom: 12px; }
+.access-gate p { color: #8A94C8; font-size: 14px; margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto; }
+.access-gate .stake-amount { font-size: 48px; font-weight: 900; color: #00D4FF; text-shadow: 0 0 30px rgba(0,212,255,0.6); margin: 20px 0 10px; line-height: 1; }
+.access-gate .stake-label { font-size: 13px; color: #8A94C8; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 24px; }
+.access-gate .stake-btn { display: inline-block; background: linear-gradient(135deg, #00D4FF, #7BFFFF); color: #fff; padding: 16px 40px; border-radius: 30px; font-weight: 700; font-size: 16px; text-decoration: none; box-shadow: 0 8px 30px rgba(0,212,255,0.5); transition: 0.3s; border: none; cursor: pointer; }
+.access-gate .stake-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,212,255,0.8); }
+
+.tiers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 40px 0; }
+.tier-card { background: linear-gradient(160deg, rgba(26,30,65,0.6), rgba(15,42,61,0.6)); border: 2px solid rgba(0,212,255,0.2); border-radius: 20px; padding: 28px 22px; text-align: center; transition: 0.3s; position: relative; }
+.tier-card:hover { border-color: #00D4FF; transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,212,255,0.3); }
+.tier-card.featured { border-color: #00D4FF; box-shadow: 0 0 40px rgba(0,212,255,0.3); }
+.tier-card.featured::before { content: '⭐ RECOMMENDED'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #00D4FF, #7BFFFF); color: #fff; padding: 4px 16px; border-radius: 20px; font-size: 10px; font-weight: 700; letter-spacing: 1px; }
+.tier-card .tier-name { font-size: 12px; color: #8A94C8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.tier-card .tier-amount { font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+.tier-card .tier-amount .unit { font-size: 16px; color: #00D4FF; }
+.tier-card .tier-apy { font-size: 40px; font-weight: 800; color: #00D4FF; margin: 16px 0 8px; text-shadow: 0 0 20px rgba(0,212,255,0.6); }
+.tier-card .tier-apy-label { font-size: 11px; color: #8A94C8; text-transform: uppercase; letter-spacing: 1px; }
+.tier-card ul { list-style: none; margin: 20px 0; text-align: left; padding: 16px; background: rgba(0,0,0,0.3); border-radius: 12px; }
+.tier-card ul li { color: #E0E6FF; font-size: 13px; padding: 6px 0; display: flex; align-items: center; gap: 8px; }
+.tier-card ul li::before { content: '✓'; color: #00D4FF; font-weight: 700; flex-shrink: 0; }
+.tier-card .tier-btn { display: block; width: 100%; background: linear-gradient(135deg, #00D4FF, #7BFFFF); color: #fff; padding: 14px 20px; border-radius: 30px; font-weight: 700; font-size: 14px; text-decoration: none; margin-top: 12px; transition: 0.3s; border: none; cursor: pointer; }
+.tier-card .tier-btn:hover { transform: scale(1.03); box-shadow: 0 8px 25px rgba(0,212,255,0.6); }
+
+.info-block { max-width: 800px; margin: 30px auto; background: rgba(0,212,255,0.05); border: 1px solid rgba(0,212,255,0.2); border-radius: 16px; padding: 22px; }
+.info-block h3 { color: #00D4FF; font-size: 16px; margin-bottom: 12px; }
+.info-block p { color: #8A94C8; font-size: 13px; line-height: 1.7; margin-bottom: 8px; }
+
+.back-link { display: inline-block; margin-top: 24px; color: #00D4FF; text-decoration: none; font-weight: 500; }
+.back-link:hover { text-decoration: underline; }
+.center { text-align: center; }
+
+@media (max-width: 800px) { .tiers-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header-bar">
+    <a href="index.html" class="logo">
+      <img src="hub_logo.png" alt="AviaHub" />
+      <span>HUB</span>
+    </a>
+    <a href="index.html" class="back-btn">← Back to Home</a>
+  </div>
+
+  <div class="section-header">
+    <span class="section-tag">🔒 Access Gate</span>
+    <h1>Stake <span class="highlight">€HUB</span> for Partner Access</h1>
+    <p>Creating a partner pool requires staking €HUB. This protects the ecosystem from spam and ensures every project is invested in the hub.</p>
+  </div>
+
+  <div class="access-gate">
+    <div class="lock-icon">🔒</div>
+    <h2>Current Access Requirement</h2>
+    <p>To create a partner pool, you must stake minimum €HUB. This stake is locked for the duration of your pool's activity.</p>
+    <div class="stake-amount">10,000</div>
+    <div class="stake-label">€HUB minimum stake</div>
+    <a href="buy.html" class="stake-btn">Buy €HUB to Stake →</a>
+  </div>
+
+  <div class="tiers-grid">
+
+    <div class="tier-card">
+      <div class="tier-name">Basic Partner</div>
+      <div class="tier-amount">10,000 <span class="unit">HUB</span></div>
+      <div class="tier-apy">12%</div>
+      <div class="tier-apy-label">APY in €AUDT</div>
+      <ul>
+        <li>Create 1 pool TOKEN/HUB</li>
+        <li>Standard fee share</li>
+        <li>Listed in Registry</li>
+      </ul>
+      <button class="tier-btn" onclick="alert('Connect wallet to stake. This is a preview.')">Stake Basic</button>
+    </div>
+
+    <div class="tier-card featured">
+      <div class="tier-name">Pro Partner</div>
+      <div class="tier-amount">50,000 <span class="unit">HUB</span></div>
+      <div class="tier-apy">18%</div>
+      <div class="tier-apy-label">APY in €AUDT + €PROOF</div>
+      <ul>
+        <li>Create up to 5 pools</li>
+        <li>Boosted fee share</li>
+        <li>Priority AI agent routing</li>
+        <li>Governance vote</li>
+      </ul>
+      <button class="tier-btn" onclick="alert('Connect wallet to stake. This is a preview.')">Stake Pro</button>
+    </div>
+
+    <div class="tier-card">
+      <div class="tier-name">Institutional</div>
+      <div class="tier-amount">200,000 <span class="unit">HUB</span></div>
+      <div class="tier-apy">25%</div>
+      <div class="tier-apy-label">APY in €AUDT + €PROOF</div>
+      <ul>
+        <li>Unlimited pools</li>
+        <li>Custom MCP integration</li>
+        <li>Custom routing priority</li>
+        <li>Governance multiplier ×3</li>
+      </ul>
+      <button class="tier-btn" onclick="alert('Connect wallet to stake. This is a preview.')">Stake Institutional</button>
+    </div>
+
+  </div>
+
+  <div class="info-block">
+    <h3>💡 Why Stake?</h3>
+    <p><strong>Access:</strong> Only staked €HUB holders can create partner pools. This prevents spam pools and ensures quality.</p>
+    <p><strong>Yield:</strong> Earn 12-25% APY in €AUDT while staking. Plus €PROOF bonuses.</p>
+    <p><strong>Governance:</strong> Staked €HUB gives voting power over hub parameters — fees, allowed tokens, MCP rules.</p>
+    <p><strong>Safety:</strong> Staked €HUB acts as a bond. If your pool causes issues, part of your stake is slashed.</p>
+  </div>
+
+  <a href="index.html" class="back-link">← Back to €HUB Home</a>
+</div>
+
+<script src="counter.js"></script>
+<script src="ai-agent.js"></script>
+
+</body>
+</html>
