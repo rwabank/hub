@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AviaHub (€HUB) — Mechanics & Verification</title>
+<link rel="icon" href="hub_logo.png" />
+<link rel="stylesheet" href="ai-agent.css" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: radial-gradient(ellipse at top, #0F2A3D 0%, #0A0E27 50%, #060920 100%); color: #E0E6FF; line-height: 1.6; padding: 40px 0 80px; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.header-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; flex-wrap: wrap; gap: 12px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; }
+.logo img { height: 40px; width: auto; border-radius: 50%; box-shadow: 0 0 20px rgba(0,212,255,0.5); }
+.logo span { font-size: 20px; font-weight: 700; }
+.back-btn { color: #8A94C8; text-decoration: none; font-size: 13px; padding: 8px 16px; border: 1px solid #2A2F5A; border-radius: 20px; transition: 0.3s; }
+.back-btn:hover { border-color: #00D4FF; color: #00D4FF; }
+
+.section-header { text-align: center; margin-bottom: 40px; }
+.section-tag { display: inline-block; background: rgba(0,212,255,0.12); color: #00D4FF; padding: 4px 16px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; border: 1px solid rgba(0,212,255,0.2); }
+.section-header h1 { font-size: 36px; font-weight: 700; margin: 8px 0; }
+.section-header h1 .highlight { color: #00D4FF; }
+.section-header p { color: #8A94C8; max-width: 700px; margin: 0 auto; font-size: 15px; }
+
+.mechanics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-bottom: 40px; }
+.mech-card { background: linear-gradient(160deg, rgba(26,30,65,0.6), rgba(15,42,61,0.6)); border: 1px solid rgba(0,212,255,0.2); border-radius: 18px; padding: 24px 20px; transition: 0.3s; }
+.mech-card:hover { border-color: #00D4FF; transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,212,255,0.2); }
+.mech-card .icon { font-size: 34px; margin-bottom: 10px; filter: drop-shadow(0 0 12px rgba(0,212,255,0.5)); }
+.mech-card h3 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+.mech-card p { color: #8A94C8; font-size: 13px; line-height: 1.7; }
+
+.specs-block { max-width: 900px; margin: 30px auto; background: linear-gradient(160deg, rgba(26,30,65,0.7), rgba(15,42,61,0.7)); border: 2px solid rgba(0,212,255,0.3); border-radius: 20px; padding: 28px; }
+.specs-block h3 { color: #00D4FF; font-size: 18px; margin-bottom: 18px; text-align: center; }
+.spec-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(0,212,255,0.1); font-size: 14px; gap: 12px; flex-wrap: wrap; }
+.spec-row:last-child { border-bottom: none; }
+.spec-row .label { color: #8A94C8; }
+.spec-row .value { color: #fff; font-family: 'Courier New', monospace; text-align: right; word-break: break-all; font-weight: 600; }
+.spec-row .value.good { color: #2ECC40; }
+.spec-row .value.warn { color: #FFA500; }
+
+.gates-block { max-width: 900px; margin: 30px auto; }
+.gates-block h3 { color: #00D4FF; font-size: 18px; margin-bottom: 20px; text-align: center; }
+.gate-item { display: flex; gap: 16px; padding: 18px 20px; background: rgba(26,30,65,0.6); border: 1px solid rgba(0,212,255,0.25); border-radius: 16px; margin-bottom: 12px; align-items: flex-start; }
+.gate-item .gate-num { flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #00D4FF, #7BFFFF); color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.gate-item .gate-content { flex: 1; }
+.gate-item .gate-title { color: #fff; font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.gate-item .gate-desc { color: #8A94C8; font-size: 13px; line-height: 1.6; }
+.gate-item .gate-code { font-family: 'Courier New', monospace; font-size: 11px; color: #7BFFFF; background: rgba(0,212,255,0.1); padding: 4px 10px; border-radius: 6px; margin-top: 8px; display: inline-block; }
+
+.info-block { max-width: 800px; margin: 30px auto; background: rgba(0,212,255,0.05); border: 1px solid rgba(0,212,255,0.2); border-radius: 16px; padding: 22px; }
+.info-block h3 { color: #00D4FF; font-size: 16px; margin-bottom: 12px; }
+.info-block p { color: #8A94C8; font-size: 13px; line-height: 1.7; margin-bottom: 8px; }
+.info-block code { background: rgba(0,212,255,0.1); color: #7BFFFF; padding: 2px 8px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 12px; }
+
+.back-link { display: inline-block; margin-top: 24px; color: #00D4FF; text-decoration: none; font-weight: 500; }
+.back-link:hover { text-decoration: underline; }
+.center { text-align: center; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header-bar">
+    <a href="index.html" class="logo">
+      <img src="hub_logo.png" alt="AviaHub" />
+      <span>HUB</span>
+    </a>
+    <a href="index.html" class="back-btn">← Back to Home</a>
+  </div>
+
+  <div class="section-header">
+    <span class="section-tag">⚙️ Mechanics</span>
+    <h1>How <span class="highlight">AviaHub</span> Works On-Chain</h1>
+    <p>Token-2022 on Solana. Verified by €PROOF · €AUDT · €CERT.</p>
+  </div>
+
+  <div class="mechanics-grid">
+
+    <div class="mech-card">
+      <div class="icon">🔗</div>
+      <h3>Token-2022 Standard</h3>
+      <p>Modern Solana token standard with extensions: Transfer Fee, Transfer Hook, Metadata.</p>
+    </div>
+
+    <div class="mech-card">
+      <div class="icon">💸</div>
+      <h3>1% Transfer Fee</h3>
+      <p>Every transfer allocates 1% to the AviaTrust treasury + liquidity pool.</p>
+    </div>
+
+    <div class="mech-card">
+      <div class="icon">🪝</div>
+      <h3>Transfer Hook</h3>
+      <p>Custom program verifies €PROOF validity on transfers in partner ecosystems.</p>
+    </div>
+
+    <div class="mech-card">
+      <div class="icon">🔒</div>
+      <h3>Mint Authority</h3>
+      <p>Disabled. Fixed supply, no inflation.</p>
+    </div>
+
+    <div class="mech-card">
+      <div class="icon">❄️</div>
+      <h3>Freeze Authority</h3>
+      <p>Disabled. No one can freeze your tokens.</p>
+    </div>
+
+    <div class="mech-card">
+      <div class="icon">📜</div>
+      <h3>On-Chain Metadata</h3>
+      <p>Hub role and verification flags stored in Metaplex metadata.</p>
+    </div>
+
+  </div>
+
+  <div class="specs-block">
+    <h3>📋 AviaHub Token Specifications</h3>
+    <div class="spec-row">
+      <span class="label">Token Name</span>
+      <span class="value">AviaHub</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">Symbol</span>
+      <span class="value">€HUB / HUB</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">Contract</span>
+      <span class="value">6TnAKD8aZek8EgPo72K4svjs6eY8XpBApvKShRAGxChL</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">Pool (Meteora)</span>
+      <span class="value">3Vt5GAsE6kSF5cxQPyqvLQJHdxJ1LfhhgFTKVdKfovMH</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">Chain</span>
+      <span class="value">Solana</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">Token Standard</span>
+      <span class="value">Token-2022</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">Transfer Fee</span>
+      <span class="value warn">1%</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">Transfer Hook</span>
+      <span class="value warn">ENABLED</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">Decimals</span>
+      <span class="value">9</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">Mint Authority</span>
+      <span class="value good">DISABLED</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">Freeze Authority</span>
+      <span class="value good">DISABLED</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">Launch Price</span>
+      <span class="value">$0.01</span>
+    </div>
+  </div>
+
+  <div class="gates-block">
+    <h3>🛡️ Three Verification Layers</h3>
+
+    <div class="gate-item">
+      <div class="gate-num">1</div>
+      <div class="gate-content">
+        <div class="gate-title">€PROOF — Certificate</div>
+        <div class="gate-desc">€HUB has a valid €PROOF from AviaTrust audit. Score 8/100 (Low risk). Certificate ID stored in metadata.</div>
+        <div class="gate-code">proof_id: 5rzYSSWCgiY5dUf7JG1i1fBUkNWbYA51fuzWhMYx6t6A</div>
+      </div>
+    </div>
+
+    <div class="gate-item">
+      <div class="gate-num">2</div>
+      <div class="gate-content">
+        <div class="gate-title">€AUDT — Payment</div>
+        <div class="gate-desc">Audit fee paid to treasury in €AUDT. Not burned — stays in circulation as working capital.</div>
+        <div class="gate-code">pay(AUDT, amount) → treasury</div>
+      </div>
+    </div>
+
+    <div class="gate-item">
+      <div class="gate-num">3</div>
+      <div class="gate-content">
+        <div class="gate-title">€CERT — Stake</div>
+        <div class="gate-desc">Traders stake €CERT for access. Anti-spam + skin in the game for partner pool creation.</div>
+        <div class="gate-code">require(stakedCERT(sender) >= minStake)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-block">
+    <h3>⚠️ Legal Notice</h3>
+    <p>€HUB is an <strong>infrastructure token</strong>. Market risk and liquidity risk apply.</p>
+    <p>Not financial advice. Only invest what you can afford to lose.</p>
+    <p>Contract: <code>6TnAKD8aZek8EgPo72K4svjs6eY8XpBApvKShRAGxChL</code></p>
+  </div>
+
+  <div class="center">
+    <a href="fintech1.html" class="back-link" style="color:#00D4FF;">← Back to Architecture</a>
+  </div>
+
+  <a href="index.html" class="back-link">← Back to €HUB Home</a>
+</div>
+
+<script src="counter.js"></script>
+<script src="ai-agent.js"></script>
+
+</body>
+</html>
