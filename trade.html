@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Trade AviaHub (€HUB) — Live Chart & Pool</title>
+<link rel="icon" href="hub_logo.png" />
+<link rel="stylesheet" href="ai-agent.css" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: radial-gradient(ellipse at top, #0F2A3D 0%, #0A0E27 50%, #060920 100%); color: #E0E6FF; line-height: 1.6; padding: 40px 0 80px; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.header-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; flex-wrap: wrap; gap: 12px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; }
+.logo img { height: 40px; width: auto; border-radius: 50%; box-shadow: 0 0 20px rgba(0,212,255,0.5); }
+.logo span { font-size: 20px; font-weight: 700; }
+.back-btn { color: #8A94C8; text-decoration: none; font-size: 13px; padding: 8px 16px; border: 1px solid #2A2F5A; border-radius: 20px; transition: 0.3s; }
+.back-btn:hover { border-color: #00D4FF; color: #00D4FF; }
+
+h1 { font-size: 32px; margin-bottom: 8px; }
+h1 .highlight { color: #00D4FF; }
+.sub { color: #8A94C8; margin-bottom: 30px; }
+
+.chart-embed { background: linear-gradient(160deg, rgba(26,30,65,0.7), rgba(15,42,61,0.7)); border: 2px solid rgba(0,212,255,0.3); border-radius: 20px; overflow: hidden; margin-bottom: 24px; box-shadow: 0 20px 60px rgba(0,212,255,0.15); }
+.chart-embed iframe { width: 100%; height: 500px; border: none; display: block; }
+
+.pool-card { background: linear-gradient(160deg, rgba(26,30,65,0.6), rgba(15,42,61,0.6)); border: 1px solid rgba(0,212,255,0.2); border-radius: 16px; padding: 20px; margin-bottom: 16px; }
+.pool-card h3 { color: #00D4FF; font-size: 15px; margin-bottom: 12px; }
+.pool-card .row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(0,212,255,0.08); font-size: 13px; gap: 12px; flex-wrap: wrap; }
+.pool-card .row:last-child { border-bottom: none; }
+.pool-card .row .label { color: #8A94C8; }
+.pool-card .row .value { color: #fff; font-family: 'Courier New', monospace; word-break: break-all; text-align: right; }
+
+.links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0; }
+.links-grid a { display: block; text-align: center; padding: 14px 10px; border-radius: 12px; background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2); color: #00D4FF; text-decoration: none; font-size: 13px; font-weight: 600; transition: 0.3s; }
+.links-grid a:hover { background: rgba(0,212,255,0.2); border-color: #00D4FF; transform: translateY(-2px); }
+.links-grid a .icon { display: block; font-size: 22px; margin-bottom: 4px; }
+
+.back-link { display: inline-block; margin-top: 24px; color: #00D4FF; text-decoration: none; font-weight: 500; }
+.back-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header-bar">
+    <a href="index.html" class="logo">
+      <img src="hub_logo.png" alt="AviaHub" />
+      <span>HUB</span>
+    </a>
+    <a href="index.html" class="back-btn">← Back to Home</a>
+  </div>
+
+  <h1>Trade <span class="highlight">AviaHub (€HUB)</span></h1>
+  <p class="sub">Live chart, pool information, and trading links.</p>
+
+  <div class="chart-embed">
+    <iframe
+      src="https://www.geckoterminal.com/solana/pools/3Vt5GAsE6kSF5cxQPyqvLQJHdxJ1LfhhgFTKVdKfovMH?embed=1&info=0&swaps=0"
+      title="€HUB Live Chart"
+      loading="lazy">
+    </iframe>
+  </div>
+
+  <div class="pool-card">
+    <h3>💧 Pool Information</h3>
+    <div class="row">
+      <span class="label">Contract</span>
+      <span class="value">6TnAKD8aZek8EgPo72K4svjs6eY8XpBApvKShRAGxChL</span>
+    </div>
+    <div class="row">
+      <span class="label">Pool</span>
+      <span class="value">3Vt5GAsE6kSF5cxQPyqvLQJHdxJ1LfhhgFTKVdKfovMH</span>
+    </div>
+    <div class="row">
+      <span class="label">DEX</span>
+      <span class="value">Meteora</span>
+    </div>
+    <div class="row">
+      <span class="label">Chain</span>
+      <span class="value">Solana</span>
+    </div>
+    <div class="row">
+      <span class="label">Token Standard</span>
+      <span class="value">Token-2022 (1% fee + Transfer Hook)</span>
+    </div>
+    <div class="row">
+      <span class="label">Verification</span>
+      <span class="value">€PROOF · €AUDT · €CERT</span>
+    </div>
+  </div>
+
+  <div class="links-grid">
+    <a href="https://opensea.io/token/solana/6TnAKD8aZek8EgPo72K4svjs6eY8XpBApvKShRAGxChL" target="_blank">
+      <span class="icon">🖼️</span> OpenSea
+    </a>
+    <a href="https://www.geckoterminal.com/solana/pools/3Vt5GAsE6kSF5cxQPyqvLQJHdxJ1LfhhgFTKVdKfovMH" target="_blank">
+      <span class="icon">📊</span> GeckoTerminal
+    </a>
+    <a href="https://app.uniswap.org/explore/tokens/solana/6TnAKD8aZek8EgPo72K4svjs6eY8XpBApvKShRAGxChL" target="_blank">
+      <span class="icon">🦄</span> Uniswap
+    </a>
+    <a href="https://solscan.io/token/6TnAKD8aZek8EgPo72K4svjs6eY8XpBApvKShRAGxChL" target="_blank">
+      <span class="icon">🔍</span> Solscan
+    </a>
+    <a href="https://birdeye.so/token/6TnAKD8aZek8EgPo72K4svjs6eY8XpBApvKShRAGxChL?chain=solana" target="_blank">
+      <span class="icon">🐦</span> Birdeye
+    </a>
+    <a href="https://dexscreener.com/solana/3Vt5GAsE6kSF5cxQPyqvLQJHdxJ1LfhhgFTKVdKfovMH" target="_blank">
+      <span class="icon">📈</span> DexScreener
+    </a>
+  </div>
+
+  <a href="index.html" class="back-link">← Back to €HUB Home</a>
+</div>
+
+<script src="counter.js"></script>
+<script src="ai-agent.js"></script>
+
+</body>
+</html>
